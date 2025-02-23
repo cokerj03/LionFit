@@ -5,7 +5,7 @@ async function handleSearch() {
 
   try {
     // Call the Nutritionix serverless function
-    const response = await fetch(`http://localhost:3000/api/nutrition?query=${encodeURIComponent(query)}`);
+    const response = await fetch('https://api.nutritionix.com/v2/search');
 
 
     const data = await response.json();
