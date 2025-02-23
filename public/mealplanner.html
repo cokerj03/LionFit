@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Planner - LionFit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <!-- Centered logo and navigation -->
+    <img src="lionFitLogo.png" alt="LionFit Logo" class="logo" loading="lazy">
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mealplanner.html">Meal Planner</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="merch.html">Merch</a></li>
+        <li><a href="workouts.html">Workouts</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="meal-planner">
+      <h1>Meal Planner</h1>
+      <!-- Nutrition Search Section -->
+      <div class="nutrition-search">
+        <h2>Find Your Perfect Meal Plan</h2>
+        <input type="text" id="searchQuery" placeholder="Enter a food item or nutrient...">
+        <button onclick="handleSearch()">Search</button>
+      </div>
+      <section id="recommendations">
+        <!-- AI-powered meal recommendations will appear here -->
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <footer>
+    <p>&copy; 2025 LionFit. All rights reserved.</p>
+  </footer>
+</body>
+</html>

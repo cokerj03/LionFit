@@ -1,0 +1,97 @@
+/* Global Styles */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Styling */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+/* Logo Styling */
+.logo {
+  height: 200px;
+  margin: 0;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+  margin-top: 10px;
+}
+
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+  color: #ddd;
+}
+
+/* Main Content Centering */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* About Section Styling */
+.about {
+  line-height: 1.6;
+}
+
+/* Nutrition Search Styling on Meal Planner Page */
+.nutrition-search {
+  margin-bottom: 20px;
+}
+
+.nutrition-search input[type="text"] {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 4px;
+}
+
+.nutrition-search button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nutrition-search button:hover {
+  background-color: #666;
+}
+
+/* Footer Styling */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  border-top: 1px solid #333;
+  margin-top: 20px;
+}
