@@ -24,7 +24,7 @@ async function handleSearch() {
     // Direct API call to Edamam with user ID
     const edamamResponse = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=70a6ee50&app_key=187e5d6682376ce9ff06148fe538e51c`, {
       headers: {
-        'Edamam-Account-User': 'cokerj1'
+        'Edamam-Account-User': 'cokerj1@csp.edu'
       }
     });
     const edamamData = await edamamResponse.json();
