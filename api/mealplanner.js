@@ -1,4 +1,5 @@
 //  serverless function to query the Edamam Meal Planner API
+
 export default async function handler(req, res) {
     const { mealType } = req.query;
     if (!mealType) {
