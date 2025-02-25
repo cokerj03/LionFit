@@ -3,18 +3,26 @@
 // Updated app.js to fetch from both Nutritionix and Edamam APIs
 // JCOker 2/25/2025 Updated
 
-// Handle search queries to fetch data from both APIs
+// Handle search queries to fetch data from both APIs directly
 async function handleSearch() {
   const query = document.getElementById('searchQuery').value;
   if (!query) return alert("Please enter a search term.");
 
   try {
-    // Call the Nutritionix serverless function
-    const nutritionixResponse = await fetch(`/api/nutrition?query=${encodeURIComponent(query)}`);
+    // Direct API call to Nutritionix
+    const nutritionixResponse = await fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-app-id': '00b81cef',  // Replace with your actual Nutritionix App ID
+        'x-app-key': '80416230649f21a0e529b38d18574c1c'  // Replace with your actual Nutritionix App Key
+      },
+      body: JSON.stringify({ query })
+    });
     const nutritionData = await nutritionixResponse.json();
 
-    // Call the Edamam serverless function
-    const edamamResponse = await fetch(`/api/mealplanner?mealType=${encodeURIComponent(query)}`);
+    // Direct API call to Edamam
+    const edamamResponse = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=70a6ee50&app_key=187e5d6682376ce9ff06148fe538e51c`);
     const edamamData = await edamamResponse.json();
 
     // Display results from both APIs
