@@ -8,7 +8,8 @@ export default async function handler(req, res) {
     
     try {
       // Construct the request URL using the provided API key
-      const url = `https://api.edamam.com/api/mealplanner/v2/recipes?type=public&q=${encodeURIComponent(mealType)}&app_id=${process.env.EDAMAM_APP_ID}&app_key=${process.env.EDAMAM_APP_KEY}`;
+      const edamamResponse = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=70a6ee50&app_key=187e5d6682376ce9ff06148fe538e51c`);
+
 
       
       const edamamResponse = await fetch(url);
