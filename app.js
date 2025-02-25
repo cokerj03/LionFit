@@ -21,9 +21,12 @@ async function handleSearch() {
     });
     const nutritionData = await nutritionixResponse.json();
 
-    // Direct API call to Edamam
-    const edamamResponse = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=70a6ee50&app_key=187e5d6682376ce9ff06148fe538e51c`);
-
+    // Direct API call to Edamam with user ID
+    const edamamResponse = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=70a6ee50&app_key=187e5d6682376ce9ff06148fe538e51c`, {
+      headers: {
+        'Edamam-Account-User': 'cokerj1'
+      }
+    });
     const edamamData = await edamamResponse.json();
 
     // Display results from both APIs
@@ -33,14 +36,48 @@ async function handleSearch() {
   }
 }
 
-// Display the results
+// Display the results in organized tables
 function displayResults(nutritionData, edamamData) {
-  const recommendationsSection = document.getElementById('recommendations');
-  recommendationsSection.innerHTML = `
-    <h3>Nutritionix Results:</h3>
-    <pre>${JSON.stringify(nutritionData, null, 2)}</pre>
+  const nutritionixTableBody = document.getElementById('nutritionix-table-body');
+  nutritionixTableBody.innerHTML = ''; // Clear previous results
 
-    <h3>Edamam Meal Planner Results:</h3>
-    <pre>${JSON.stringify(edamamData, null, 2)}</pre>
-  `;
+  // Populate Nutritionix Table
+  if (nutritionData.foods && nutritionData.foods.length > 0) {
+    nutritionData.foods.forEach(food => {
+      const row = `
+        <tr>
+          <td>${food.food_name}</td>
+          <td>${food.nf_calories}</td>
+          <td>${food.nf_protein}</td>
+          <td>${food.nf_total_fat}</td>
+          <td>${food.nf_total_carbohydrate}</td>
+        </tr>
+      `;
+      nutritionixTableBody.innerHTML += row;
+    });
+  } else {
+    nutritionixTableBody.innerHTML = '<tr><td colspan="5">No results found.</td></tr>';
+  }
+
+  // Populate Edamam Table
+  const edamamTableBody = document.getElementById('edamam-table-body');
+  edamamTableBody.innerHTML = ''; // Clear previous results
+
+  if (edamamData.hits && edamamData.hits.length > 0) {
+    edamamData.hits.forEach(hit => {
+      const recipe = hit.recipe;
+      const row = `
+        <tr>
+          <td>${recipe.label}</td>
+          <td>${Math.round(recipe.calories)}</td>
+          <td>${recipe.mealType ? recipe.mealType[0] : 'N/A'}</td>
+          <td>${recipe.source}</td>
+          <td><a href="${recipe.url}" target="_blank">View Recipe</a></td>
+        </tr>
+      `;
+      edamamTableBody.innerHTML += row;
+    });
+  } else {
+    edamamTableBody.innerHTML = '<tr><td colspan="5">No results found or error fetching data.</td></tr>';
+  }
 }
