@@ -1,23 +1,22 @@
-<section class="meal-planner">
-  <h1>Meal Planner</h1>
-  <!-- Nutrition Search Section -->
-  <div class="nutrition-search">
-    <h2>Find Your Perfect Meal Plan</h2>
-    <input type="text" id="searchQuery" placeholder="Enter a food item or meal type...">
-    <button onclick="handleSearch()">Search</button>
-  </div>
+// Example: Vercel serverless function to query the Edamam Meal Planner API
+export default async function handler(req, res) {
+    const { mealType } = req.query;
+    if (!mealType) {
+      res.status(400).json({ error: 'Missing mealType parameter' });
+      return;
+    }
+    
+    try {
+      // Construct the request URL using the provided API key
+      const url = `https://api.edamam.com/api/mealplanner/v2/recipes?type=public&q=${encodeURIComponent(mealType)}&app_id=${process.env.EDAMAM_APP_ID}&app_key=${process.env.EDAMAM_APP_KEY}`;
 
-  <section id="recommendations">
-    <!-- Nutritionix Results -->
-    <div id="nutritionix-results">
-      <h2>Nutritionix Results</h2>
-    </div>
-
-    <!-- Edamam Meal Planner Results -->
-    <div id="edamam-results">
-      <h2>Edamam Meal Planner Results</h2>
-    </div>
-  </section>
-</section>
-
-<script src="app.js"></script>
+      
+      const edamamResponse = await fetch(url);
+      const mealData = await edamamResponse.json();
+      res.status(200).json(mealData);
+    } catch (error) {
+      console.error("Error in Edamam API call:", error);
+      res.status(500).json({ error: 'Error fetching data from Edamam Meal Planner' });
+    }
+  }
+  
