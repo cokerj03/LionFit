@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     
     try {
       // Make a secure request to Nutritionix API
-      const nutritionixResponse = await fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+      const nutritionixResponse = await fetch('https://api.nutritionix.com/v2/search'){
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
