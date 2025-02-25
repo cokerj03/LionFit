@@ -1,48 +1,52 @@
 # LionFit
 
-LionFit is a modern health and fitness web application that helps users search for nutritional information and receive personalized meal recommendations. The app integrates with the Nutritionix and Edamam Meal Planner APIs and features AI-enhanced smart recommendations, serverless API handling, and performance optimization.
+LionFit is a modern health and fitness web application designed to empower users on their journey to a healthier lifestyle. The site features personalized nutrition insights, expert meal planning, and fitness resources—all accessible through a clean, modern interface with multiple pages.
 
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Deployment](#deployment)
+- [Installation & Development](#installation--development)
+- [Deployment Considerations](#deployment-considerations)
 - [Future Enhancements](#future-enhancements)
 - [License](#license)
 - [Contact](#contact)
 
 ## Overview
 
-LionFit is designed to empower users to make healthier food choices by providing detailed nutritional data and smart meal planning recommendations. The application emphasizes performance, security, and an intuitive user interface, featuring a sleek black background with white text and the LionFit logo displayed at the top left.
+LionFit provides:
+- **About Information:** Learn about LionFit’s mission, services, and team on the Home page.
+- **Meal Planner:** Get personalized meal planning recommendations via nutrition search and AI-enhanced suggestions.
+- **Blog:** Read comprehensive guides on nutrition and meal planning.
+- **Workout & Merch:** Explore upcoming workout programs and merchandise (both pages currently display “Coming Soon”).
+- **Contact:** Get in touch through a dedicated contact form.
 
 ## Features
 
-- **AI-Enhanced Recommendations:**  
-  Utilize AI-powered search and smart meal suggestions based on user input. This can later be expanded to include features such as a chatbot or NLP-based responses.
-  
-- **Serverless Functions:**  
-  API calls are managed by serverless functions (e.g., on Vercel or Netlify), ensuring scalable and secure data handling.
-  
-- **Performance Optimization:**  
-  The app incorporates lazy loading, code splitting, and compression techniques to achieve high performance (targeting 90+ on Google Lighthouse).
-  
-- **Security & Best Practices:**  
-  Implementations include secure API calls, input validation, and user authentication (using JWT, Firebase Auth, or a custom solution).
+- **Multi-Page Navigation:**  
+  - **Home (About):** Overview of LionFit’s mission and offerings.
+  - **Meal Planner:** Nutrition search functionality integrated with external API endpoints.
+  - **Blog:** In-depth articles and guides.
+  - **Workout & Merch:** Upcoming content pages (Coming Soon).
+  - **Contact:** A fully styled contact form.
+
+- **API Integration:**  
+  - Connects to external nutrition APIs (e.g., Nutritionix) for meal recommendations.  
+  - **Note:** The current API endpoint is set to `localhost:3000` for local development. When deploying to GitHub Pages (which supports static sites only), you must deploy your serverless functions (using Vercel, Netlify, etc.) and update your API endpoint URLs in the code.
+
+- **Responsive & Modern Design:**  
+  - Centered header with logo and navigation.
+  - Clean, dark-themed design with white text and consistent styling across pages.
 
 ## Technology Stack
 
-- **Frontend:**  
-  HTML, CSS, JavaScript (or frameworks like React)
-  
-- **Backend:**  
-  Serverless functions (Node.js) deployed on platforms such as Vercel, Netlify, or Firebase
-  
-- **APIs:**  
-  - **Nutritionix API** (API key: `00b81cef`)
-  - **Edamam Meal Planner API** (API key: `bb67a30b4ec2d751721fdf6b8f59a2c2`)
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend (API/Serverless Functions):** Node.js (deployed on a platform that supports serverless functions, e.g., Vercel/Netlify)
+- **Deployment:**  
+  - **Static Site:** GitHub Pages for hosting static HTML, CSS, and client-side JavaScript.
+  - **API Endpoints:** Must be hosted separately on a backend platform (GitHub Pages does not support serverless functions).
 
 ## Project Structure
 
+LionFit/ ├── public/ │ ├── index.html // Home/About page │ ├── mealplanner.html // Meal Planner page with nutrition search │ ├── blog.html // Blog page with detailed nutrition guides │ ├── workout.html // Workout page (Coming Soon) │ ├── merch.html // Merch page (Coming Soon) │ ├── contact.html // Contact page with form │ ├── lionFitLogo.png // Logo file │ └── style.css // Global styling for the site ├── api/ │ ├── nutrition.js // Serverless function for Nutritionix API (to be deployed on a backend platform) │ └── other-api.js // Additional API functions (if needed) ├── app.js // Client-side JavaScript (handles API calls, etc.) └── README.md // Project documentation

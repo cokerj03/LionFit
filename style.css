@@ -1,6 +1,6 @@
 /* Global Styles */
 body {
-  background-color: #000;
+  background-color: navy;
   color: #fff;
   font-family: Arial, sans-serif;
   margin: 0;
@@ -86,6 +86,13 @@ main {
 
 .nutrition-search button:hover {
   background-color: #666;
+}
+
+/* Chart Styling on Meal Planner Page */
+.chart {
+  border: 2px solid #fff; /* White border lines around the chart */
+  padding: 10px;
+  margin-top: 20px;
 }
 
 /* Footer Styling */
