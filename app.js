@@ -7,34 +7,29 @@ async function searchNutrition() {
       return;
   }
 
-  const apiUrl = `https://api.edamam.com/api/nutrition-data?app_id=91514fbb&app_key=c9a91400ab5848008891e9d343cafa8e&ingr=${encodeURIComponent(query)}`;
+  const appId = "91514fbb";  // Replace if incorrect
+  const appKey = "c9a91400ab5848008891e9d343cafa8e";  // Replace if incorrect
+  const apiUrl = `https://api.edamam.com/api/nutrition-data?app_id=${appId}&app_key=${appKey}&ingr=${encodeURIComponent(query)}`;
+
+  console.log("Fetching from:", apiUrl);  // Debugging log
 
   try {
       const response = await fetch(apiUrl);
+
       if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
+          const errorMessage = await response.text();
+          throw new Error(`API Error ${response.status}: ${errorMessage}`);
       }
 
       const data = await response.json();
+      console.log("Nutrition API Response:", data);  // Debugging log
       displayNutritionResults(query, data);
   } catch (error) {
       console.error("Error fetching nutrition data:", error);
-      alert("Failed to fetch nutrition data.");
+      alert("Failed to fetch nutrition data. Check API keys or permissions.");
   }
 }
 
-function displayNutritionResults(food, data) {
-  const tableBody = document.getElementById('nutrition-table-body');
-  tableBody.innerHTML = `
-      <tr>
-          <td>${food}</td>
-          <td>${Math.round(data.calories)}</td>
-          <td>${data.totalNutrients.PROCNT ? Math.round(data.totalNutrients.PROCNT.quantity) : 0}</td>
-          <td>${data.totalNutrients.FAT ? Math.round(data.totalNutrients.FAT.quantity) : 0}</td>
-          <td>${data.totalNutrients.CHOCDF ? Math.round(data.totalNutrients.CHOCDF.quantity) : 0}</td>
-      </tr>
-  `;
-}
 
 async function searchFoodDatabase() {
   const query = document.getElementById('foodQuery').value.trim();
