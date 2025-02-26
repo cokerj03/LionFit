@@ -7,7 +7,7 @@ async function handleSearch() {
     return;
   }
 
-  const apiUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=70a6ee50&app_key=187e5d6682376ce9ff06148fe538e51c`;
+  const apiUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=a0d62e98&app_key=bb67a30b4ec2d751721fdf6b8f59a2c2`;
 
   try {
     const response = await fetch(apiUrl);
