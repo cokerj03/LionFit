@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,29 +21,58 @@
       </ul>
     </nav>
   </header>
+  
   <main>
     <section class="meal-planner">
       <h1>Meal Planner</h1>
+      
+      <!-- Nutrition Search Section -->
       <div class="nutrition-search">
-        <h2>Find Your Perfect Meal Plan</h2>
-        <input type="text" id="searchQuery" placeholder="Enter a food item or meal type...">
-        <button onclick="handleSearch()">Search</button>
+        <h2>Analyze Food Nutrition</h2>
+        <input type="text" id="nutritionQuery" placeholder="Enter a food item (e.g., Apple, Chicken)">
+        <button onclick="searchNutrition()">Analyze</button>
       </div>
 
-      <section id="recommendations">
-        <div id="edamam-results">
-          <h2>Edamam Results</h2>
+      <!-- Food Database Search Section -->
+      <div class="food-database-search">
+        <h2>Search Food Database</h2>
+        <input type="text" id="foodQuery" placeholder="Enter a food item (e.g., Bread, Rice)">
+        <button onclick="searchFoodDatabase()">Search</button>
+      </div>
+
+      <section id="results">
+        <!-- Nutrition Results -->
+        <div id="nutrition-results">
+          <h2>Nutrition Analysis</h2>
           <table>
             <thead>
               <tr>
-                <th>Recipe</th>
+                <th>Food</th>
                 <th>Calories</th>
-                <th>Meal Type</th>
-                <th>Source</th>
-                <th>Link</th>
+                <th>Protein (g)</th>
+                <th>Fat (g)</th>
+                <th>Carbs (g)</th>
               </tr>
             </thead>
-            <tbody id="edamam-table-body">
+            <tbody id="nutrition-table-body">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Food Database Results -->
+        <div id="food-database-results">
+          <h2>Food Database Search</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Food Name</th>
+                <th>Category</th>
+                <th>Calories (per 100g)</th>
+                <th>More Info</th>
+              </tr>
+            </thead>
+            <tbody id="food-table-body">
               <!-- Dynamically populated rows -->
             </tbody>
           </table>
@@ -52,6 +80,7 @@
       </section>
     </section>
   </main>
+
   <script src="./app.js"></script>
   <footer>
     <p>&copy; 2025 LionFit. All rights reserved.</p>
