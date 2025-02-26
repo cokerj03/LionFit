@@ -33,11 +33,11 @@
         <button onclick="searchNutrition()">Analyze</button>
       </div>
 
-      <!-- Food Database Search Section -->
-      <div class="food-database-search">
-        <h2>Search Food Database</h2>
-        <input type="text" id="foodQuery" placeholder="Enter a food item (e.g., Bread, Rice)">
-        <button onclick="searchFoodDatabase()">Search</button>
+      <!-- Recipe Search Section -->
+      <div class="recipe-search">
+        <h2>Find Recipes</h2>
+        <input type="text" id="recipeQuery" placeholder="Enter a meal type (e.g., Salad, Pasta)">
+        <button onclick="searchRecipes()">Search</button>
       </div>
 
       <section id="results">
@@ -60,19 +60,20 @@
           </table>
         </div>
 
-        <!-- Food Database Results -->
-        <div id="food-database-results">
-          <h2>Food Database Search</h2>
+        <!-- Recipe Results -->
+        <div id="recipe-results">
+          <h2>Recipes</h2>
           <table>
             <thead>
               <tr>
-                <th>Food Name</th>
-                <th>Category</th>
-                <th>Calories (per 100g)</th>
-                <th>More Info</th>
+                <th>Recipe</th>
+                <th>Calories</th>
+                <th>Meal Type</th>
+                <th>Source</th>
+                <th>Link</th>
               </tr>
             </thead>
-            <tbody id="food-table-body">
+            <tbody id="recipe-table-body">
               <!-- Dynamically populated rows -->
             </tbody>
           </table>
