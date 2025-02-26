@@ -11,7 +11,7 @@ async function handleSearch() {
 
   try {
     const response = await fetch(apiUrl);
-    
+
     if (!response.ok) {
       if (response.status === 401) {
         throw new Error("Unauthorized: Check your Edamam API credentials.");
