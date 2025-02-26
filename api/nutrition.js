@@ -1,28 +1,22 @@
-// Example: Vercel serverless function to securely query the Nutritionix API
+//  serverless function to securely query the Nutritionix API
+
 export default async function handler(req, res) {
-    const { query } = req.query;
-    if (!query) {
-      res.status(400).json({ error: 'Missing query parameter' });
-      return;
-    }
-    
-    try {
-      // Make a secure request to Nutritionix API
-      const nutritionixResponse = await fetch('https://api.nutritionix.com/v2/search'){
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-app-id': process.env.NUTRITIONIX_APP_ID,
-          'x-app-key': process.env.NUTRITIONIX_APP_KEY
-        },
-        body: JSON.stringify({ query })
-      });
-      
-      const nutritionData = await nutritionixResponse.json();
-      res.status(200).json(nutritionData);
-    } catch (error) {
-      console.error("Error in Nutritionix API call:", error);
-      res.status(500).json({ error: 'Error fetching data from Nutritionix' });
-    }
+  const { query } = req.query;
+  if (!query) {
+    res.status(400).json({ error: 'Missing query parameter' });
+    return;
   }
+
+  const nutritionUrl = `https://api.edamam.com/api/nutrition-data?app_id=91514fbb&app_key=c9a91400ab5848008891e9d343cafa8e&ingr=${encodeURIComponent(query)}`;
+
+  try {
+    const response = await fetch(nutritionUrl);
+    const nutritionData = await response.json();
+    res.status(200).json(nutritionData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: 'Error fetching nutrition data' });
+  }
+}
+
   
