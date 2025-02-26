@@ -9,7 +9,8 @@ async function searchNutrition() {
 
   const appId = "91514fbb";  // Replace if incorrect
   const appKey = "c9a91400ab5848008891e9d343cafa8e";  // Replace if incorrect
-  const apiUrl = `https://api.edamam.com/api/nutrition-data?app_id=${appId}&app_key=${appKey}&ingr=${encodeURIComponent(query)}`;
+  const apiUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=642c1ed1&app_key=891c89de7dce7f48901d54feec5ad73c&ingr=${encodeURIComponent(query)}`;
+
 
   console.log("Fetching from:", apiUrl);  // Debugging log
 
