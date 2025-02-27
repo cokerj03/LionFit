@@ -1,4 +1,4 @@
-const API_BASE = "https://lion-fit-iiry.vercel.app"; // ✅ Make sure this is correct!
+const API_BASE = "lion-fit-iiry.vercel.app"; 
 
 async function searchNutrition() {
     const query = document.getElementById('nutritionQuery').value.trim();
