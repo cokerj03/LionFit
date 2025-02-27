@@ -1,4 +1,4 @@
-const API_BASE = "https://lion-fit-iiry.vercel.app"; 
+const API_BASE = "https://lion-fit-iiry.vercel.app"; // ✅ Ensure this is correct!
 
 async function searchNutrition() {
     console.log("🔄 Sending request to:", `${API_BASE}/api/nutrition?q=chicken`);
@@ -13,6 +13,13 @@ async function searchNutrition() {
 
     try {
         const response = await fetch(apiUrl);
+
+        // 🔹 Handle non-JSON responses
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new Error("Received non-JSON response from API");
+        }
+
         if (!response.ok) {
             const errorMsg = await response.text();
             throw new Error(`API Error ${response.status}: ${errorMsg}`);
@@ -23,9 +30,10 @@ async function searchNutrition() {
         displayNutritionResults(data);
     } catch (error) {
         console.error("❌ Error fetching nutrition data:", error);
-        alert("Failed to fetch nutrition data.");
+        alert("Failed to fetch nutrition data. Check the API response.");
     }
 }
+
 
 
 
