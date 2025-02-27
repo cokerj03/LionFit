@@ -6,11 +6,8 @@ require('dotenv').config();
 const app = express();
 
 // ✅ Allow frontend to call the backend (allow all origins or specify the frontend URL)
-app.use(cors({
-  origin: ["https://lion-fit-iiry-git-main-jamies-projects-9fece856.vercel.app"], // specify your frontend URL
-  methods: ["GET"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(cors());
+
 
 // Your existing code...
 

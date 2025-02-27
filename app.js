@@ -1,6 +1,8 @@
 const API_BASE = "https://lion-fit-iiry.vercel.app"; 
 
 async function searchNutrition() {
+    console.log("🔄 Sending request to:", `${API_BASE}/api/nutrition?q=chicken`);
+    
     const query = document.getElementById('nutritionQuery').value.trim();
     if (!query) {
         alert("Please enter a food item.");
@@ -17,6 +19,7 @@ async function searchNutrition() {
         }
 
         const data = await response.json();
+        console.log("✅ Nutrition Data Received:", data);
         displayNutritionResults(data);
     } catch (error) {
         console.error("❌ Error fetching nutrition data:", error);
