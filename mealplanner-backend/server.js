@@ -4,8 +4,15 @@ const fetch = require('node-fetch');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+// ✅ Allow frontend to call the backend
+app.use(cors({
+    origin: ["https://lion-fit-iiry.vercel.app"], // ✅ Add your frontend URL
+    methods: ["GET"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express.json());
+
 
 const CLIENT_ID = process.env.FATSECRET_CLIENT_ID;
 const CLIENT_SECRET = process.env.FATSECRET_CLIENT_SECRET;
