@@ -4,24 +4,16 @@ const fetch = require('node-fetch');
 const cors = require('cors');
 
 const app = express();
-
-// ✅ Allow requests from frontend
-app.use(cors({
-    origin: ["https://lion-fit-iiry-git-main-jamies-projects-9fece856.vercel.app"], // ✅ Allow your frontend URL
-    methods: ["GET"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+app.use(cors());  // ✅ Ensure CORS is enabled
 app.use(express.json());
 
-// ✅ Load API credentials
 const CLIENT_ID = process.env.FATSECRET_CLIENT_ID;
 const CLIENT_SECRET = process.env.FATSECRET_CLIENT_SECRET;
 
 let accessToken = "";
 let tokenExpiresAt = 0;
 
-// ✅ Fetch OAuth Token
+// ✅ Function to Get FatSecret OAuth Token
 async function getAccessToken() {
     console.log("🔄 Fetching new FatSecret access token...");
     const tokenUrl = "https://oauth.fatsecret.com/connect/token";
@@ -57,7 +49,7 @@ async function ensureValidToken() {
     }
 }
 
-// ✅ API Route for Nutrition Search (Fix 404 Error Here)
+// ✅ Fix 404 & Non-JSON Response Issues
 app.get('/api/nutrition', async (req, res) => {
     console.log("✅ Received request for /api/nutrition");
 
@@ -75,8 +67,14 @@ app.get('/api/nutrition', async (req, res) => {
             headers: { "Authorization": `Bearer ${accessToken}` }
         });
 
+        // ✅ Handle non-JSON responses
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new Error("Received non-JSON response from FatSecret API");
+        }
+
         if (!response.ok) {
-            throw new Error(`API Error ${response.status}`);
+            throw new Error(`API Error ${response.status}: ${await response.text()}`);
         }
 
         const data = await response.json();
