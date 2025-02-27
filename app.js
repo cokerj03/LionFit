@@ -1,6 +1,8 @@
-const API_BASE = "https://lion-fit-iiry.vercel.app/mealplanner.html"; 
+const API_BASE = "https://lion-fit-iiry.vercel.app"; // ✅ Ensure this is correct!
 
 async function searchNutrition() {
+    console.log("🔄 Sending request to:", `${API_BASE}/api/nutrition?q=chicken`);
+    
     const query = document.getElementById('nutritionQuery').value.trim();
     if (!query) {
         alert("Please enter a food item.");
@@ -12,16 +14,19 @@ async function searchNutrition() {
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
-            throw new Error(`API Error ${response.status}`);
+            const errorMsg = await response.text();
+            throw new Error(`API Error ${response.status}: ${errorMsg}`);
         }
 
         const data = await response.json();
+        console.log("✅ Nutrition Data Received:", data);
         displayNutritionResults(data);
     } catch (error) {
-        console.error("Error fetching nutrition data:", error);
+        console.error("❌ Error fetching nutrition data:", error);
         alert("Failed to fetch nutrition data.");
     }
 }
+
 
 
 function displayNutritionResults(data) {

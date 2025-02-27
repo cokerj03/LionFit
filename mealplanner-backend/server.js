@@ -7,13 +7,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//Load for .env
+// ✅ Load credentials from .env
 const CLIENT_ID = process.env.FATSECRET_CLIENT_ID;
 const CLIENT_SECRET = process.env.FATSECRET_CLIENT_SECRET;
+
 let accessToken = "";
 let tokenExpiresAt = 0;
 
-// ✅ Step 1: Fetch OAuth Token
+// ✅ Fetch OAuth Token
 async function getAccessToken() {
     console.log("🔄 Fetching new FatSecret access token...");
     const tokenUrl = "https://oauth.fatsecret.com/connect/token";
@@ -30,8 +31,7 @@ async function getAccessToken() {
         });
 
         if (!response.ok) {
-            const errorMsg = await response.text();
-            throw new Error(`OAuth Error ${response.status}: ${errorMsg}`);
+            throw new Error(`OAuth Error ${response.status}`);
         }
 
         const data = await response.json();
@@ -43,15 +43,17 @@ async function getAccessToken() {
     }
 }
 
-// ✅ Step 2: Ensure Token is Valid Before API Calls
+// ✅ Ensure Token is Valid Before API Calls
 async function ensureValidToken() {
     if (!accessToken || Date.now() >= tokenExpiresAt) {
         await getAccessToken();
     }
 }
 
-// ✅ Step 3: API Route for Nutrition Search
+// ✅ Fix 404 Error: Ensure API Route Exists
 app.get('/api/nutrition', async (req, res) => {
+    console.log("✅ Received request for /api/nutrition");
+
     const query = req.query.q;
     if (!query) {
         return res.status(400).json({ error: "Missing food query" });
@@ -67,17 +69,18 @@ app.get('/api/nutrition', async (req, res) => {
         });
 
         if (!response.ok) {
-            throw new Error(`API Error ${response.status}: ${await response.text()}`);
+            throw new Error(`API Error ${response.status}`);
         }
 
         const data = await response.json();
+        console.log("✅ FatSecret API Response:", data);
         res.json(data);
     } catch (error) {
         console.error("❌ Error fetching nutrition data:", error);
-        res.status(500).json({ error: "Failed to fetch nutrition data" });
+        res.status(500).json({ error: "Failed to fetch nutrition data." });
     }
 });
 
-// ✅ Step 4: Start the Server
+// ✅ Start the Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
