@@ -1,18 +1,20 @@
-const cors = require('cors');
+require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
-require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 
-// ✅ Allow frontend to call the backend (allow all origins or specify the frontend URL)
-app.use(cors());
+// ✅ Allow requests from frontend
+app.use(cors({
+    origin: ["https://lion-fit-iiry-git-main-jamies-projects-9fece856.vercel.app"], // ✅ Allow your frontend URL
+    methods: ["GET"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
+app.use(express.json());
 
-// Your existing code...
-
-
-// ✅ Load credentials from .env
+// ✅ Load API credentials
 const CLIENT_ID = process.env.FATSECRET_CLIENT_ID;
 const CLIENT_SECRET = process.env.FATSECRET_CLIENT_SECRET;
 
@@ -55,7 +57,7 @@ async function ensureValidToken() {
     }
 }
 
-// ✅ Fix 404 Error: Ensure API Route Exists
+// ✅ API Route for Nutrition Search (Fix 404 Error Here)
 app.get('/api/nutrition', async (req, res) => {
     console.log("✅ Received request for /api/nutrition");
 
