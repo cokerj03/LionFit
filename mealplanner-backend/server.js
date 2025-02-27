@@ -63,7 +63,7 @@ app.get('/api/nutrition', async (req, res) => {
         return res.status(400).json({ error: "Missing food query" });
     }
 
-    await ensureValidToken();
+    await ensureValidToken(); // Ensure FatSecret authentication
 
     const apiUrl = `https://platform.fatsecret.com/rest/server.api?method=foods.search&search_expression=${encodeURIComponent(query)}&format=json`;
 
@@ -83,6 +83,7 @@ app.get('/api/nutrition', async (req, res) => {
         res.status(500).json({ error: "Failed to fetch nutrition data" });
     }
 });
+
 
 // Step 4: API Route for Recipe Search
 app.get('/api/recipes', async (req, res) => {

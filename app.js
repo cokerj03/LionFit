@@ -1,5 +1,4 @@
-const API_BASE = "https://lion-fit-iiry.vercel.app"; // ✅ Replace with your actual backend URL
-let nutritionChart; // Store Chart.js instance
+const API_BASE = "https://lion-fit-iiry.vercel.app"; // ✅ Make sure this is correct!
 
 async function searchNutrition() {
     const query = document.getElementById('nutritionQuery').value.trim();
@@ -23,6 +22,7 @@ async function searchNutrition() {
         alert("Failed to fetch nutrition data.");
     }
 }
+
 
 function displayNutritionResults(data) {
     const tableBody = document.getElementById('nutrition-table-body');
