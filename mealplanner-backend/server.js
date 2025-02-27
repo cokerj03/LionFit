@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());  // ✅ Ensure CORS is enabled
+app.use(cors());  
 app.use(express.json());
 
 const CLIENT_ID = process.env.FATSECRET_CLIENT_ID;
@@ -13,7 +13,13 @@ const CLIENT_SECRET = process.env.FATSECRET_CLIENT_SECRET;
 let accessToken = "";
 let tokenExpiresAt = 0;
 
-// ✅ Function to Get FatSecret OAuth Token
+// ✅ Check if API credentials exist
+if (!CLIENT_ID || !CLIENT_SECRET) {
+    console.error("❌ Missing FatSecret API credentials in .env");
+    process.exit(1);
+}
+
+// ✅ Step 1: Get a New FatSecret OAuth Token
 async function getAccessToken() {
     console.log("🔄 Fetching new FatSecret access token...");
     const tokenUrl = "https://oauth.fatsecret.com/connect/token";
@@ -30,7 +36,7 @@ async function getAccessToken() {
         });
 
         if (!response.ok) {
-            throw new Error(`OAuth Error ${response.status}`);
+            throw new Error(`OAuth Error ${response.status}: ${await response.text()}`);
         }
 
         const data = await response.json();
@@ -39,17 +45,18 @@ async function getAccessToken() {
         console.log("✅ FatSecret Access Token Retrieved!");
     } catch (error) {
         console.error("❌ Failed to retrieve FatSecret token:", error);
+        accessToken = "";
     }
 }
 
-// ✅ Ensure Token is Valid Before API Calls
+// ✅ Step 2: Ensure Token is Valid Before Every API Request
 async function ensureValidToken() {
     if (!accessToken || Date.now() >= tokenExpiresAt) {
         await getAccessToken();
     }
 }
 
-// ✅ Fix 404 & Non-JSON Response Issues
+// ✅ Step 3: API Route for Nutrition Search
 app.get('/api/nutrition', async (req, res) => {
     console.log("✅ Received request for /api/nutrition");
 
@@ -58,7 +65,11 @@ app.get('/api/nutrition', async (req, res) => {
         return res.status(400).json({ error: "Missing food query" });
     }
 
-    await ensureValidToken();
+    await ensureValidToken(); // ✅ Ensure token is valid
+
+    if (!accessToken) {
+        return res.status(500).json({ error: "No valid API token available" });
+    }
 
     const apiUrl = `https://platform.fatsecret.com/rest/server.api?method=foods.search&search_expression=${encodeURIComponent(query)}&format=json`;
 
@@ -85,6 +96,6 @@ app.get('/api/nutrition', async (req, res) => {
     }
 });
 
-// ✅ Start the Server
+// ✅ Step 4: Start the Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

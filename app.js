@@ -14,7 +14,7 @@ async function searchNutrition() {
     try {
         const response = await fetch(apiUrl);
 
-        // 🔹 Handle non-JSON responses
+        // ✅ Handle non-JSON responses
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
             throw new Error("Received non-JSON response from API");
