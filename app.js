@@ -1,4 +1,4 @@
-const API_BASE = "https://lion-fit-iiry.vercel.app/mealplanner.html"; 
+const API_BASE = "https://lion-fit-iiry.vercel.app"; 
 h
 async function searchNutrition() {
     console.log("🔄 Sending request to:", `${API_BASE}/api/nutrition?q=chicken`);
