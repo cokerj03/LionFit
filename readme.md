@@ -1,52 +1,125 @@
-# LionFit
+# 🦁 LionFit - Health & Nutrition Web App
 
-LionFit is a modern health and fitness web application designed to empower users on their journey to a healthier lifestyle. The site features personalized nutrition insights, expert meal planning, and fitness resources—all accessible through a clean, modern interface with multiple pages.
+LionFit is a **modern health & fitness** web application designed to provide users with **personalized nutrition insights, meal planning tools, and fitness resources**. It integrates the **FatSecret API** for real-time nutrition data.
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Installation & Development](#installation--development)
-- [Deployment Considerations](#deployment-considerations)
-- [Future Enhancements](#future-enhancements)
-- [License](#license)
-- [Contact](#contact)
+---
 
-## Overview
+## 📌 Features
+- ✅ **Meal Planner** – Search for food items and get nutrition breakdowns.
+- ✅ **Interactive Nutrition Charts** – View calories, protein, fat, and carb breakdowns using **Chart.js**.
+- ✅ **FatSecret API Integration** – Fetch food data directly from **FatSecret**.
+- ✅ **Workout & Merch Pages** – Future fitness programs and store (Coming Soon).
+- ✅ **Health & Nutrition Blog** – Read fitness and meal-planning guides.
+- ✅ **Contact Form** – Get in touch with the LionFit team.
 
-LionFit provides:
-- **About Information:** Learn about LionFit’s mission, services, and team on the Home page.
-- **Meal Planner:** Get personalized meal planning recommendations via nutrition search and AI-enhanced suggestions.
-- **Blog:** Read comprehensive guides on nutrition and meal planning.
-- **Workout & Merch:** Explore upcoming workout programs and merchandise (both pages currently display “Coming Soon”).
-- **Contact:** Get in touch through a dedicated contact form.
+---
 
-## Features
+## 🛠️ Technology Stack
+- **Frontend:** HTML, CSS, JavaScript (Hosted on **GitHub Pages**)
+- **Backend:** Node.js, Express.js (Deployed on **Vercel**)
+- **API:** FatSecret API for real-time nutrition data
+- **Charting Library:** Chart.js for visualizing nutrition data
 
-- **Multi-Page Navigation:**  
-  - **Home (About):** Overview of LionFit’s mission and offerings.
-  - **Meal Planner:** Nutrition search functionality integrated with external API endpoints.
-  - **Blog:** In-depth articles and guides.
-  - **Workout & Merch:** Upcoming content pages (Coming Soon).
-  - **Contact:** A fully styled contact form.
+---
 
-- **API Integration:**  
-  - Connects to external nutrition APIs (e.g., Nutritionix) for meal recommendations.  
-  - **Note:** The current API endpoint is set to `localhost:3000` for local development. When deploying to GitHub Pages (which supports static sites only), you must deploy your serverless functions (using Vercel, Netlify, etc.) and update your API endpoint URLs in the code.
+## 📂 Project Structure
+```
+📎 lionfit
+👉 📂 frontend
+    👉 index.html        # Homepage
+    👉 mealplanner.html  # Meal Planner with FatSecret API
+    👉 blog.html         # Nutrition & Fitness Blog
+    👉 workouts.html     # Workouts (Coming Soon)
+    👉 contact.html      # Contact Page
+    👉 style.css         # Global styles
+    👉 app.js            # Frontend logic for API calls & UI updates
+    👉 lionFitLogo.png   # Branding
+👉 📂 backend
+    👉 server.js         # Express.js backend with FatSecret API integration
+    👉 .env              # API credentials (DO NOT COMMIT)
+    👉 vercel.json       # Deployment config for Vercel
+👉 README.md             # Documentation
+```
 
-- **Responsive & Modern Design:**  
-  - Centered header with logo and navigation.
-  - Clean, dark-themed design with white text and consistent styling across pages.
+---
 
-## Technology Stack
+## 🚀 Installation & Development
+### **1️⃣ Clone the Repository**
+```sh
+git clone https://github.com/YOUR_GITHUB_USERNAME/lionfit.git
+cd lionfit
+```
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend (API/Serverless Functions):** Node.js (deployed on a platform that supports serverless functions, e.g., Vercel/Netlify)
-- **Deployment:**  
-  - **Static Site:** GitHub Pages for hosting static HTML, CSS, and client-side JavaScript.
-  - **API Endpoints:** Must be hosted separately on a backend platform (GitHub Pages does not support serverless functions).
+### **2️⃣ Install Dependencies**
+Ensure **Node.js** is installed, then run:
+```sh
+npm install
+```
 
-## Project Structure
+### **3️⃣ Configure API Keys**
+Create a `.env` file in the **backend folder** and add your **FatSecret API credentials**:
+```
+FATSECRET_CLIENT_ID=a4b776a26aba43f082824398b0f2efaf
+FATSECRET_CLIENT_SECRET=36feb23191d04fd4bc65ace99e7982be
+```
 
-LionFit/ ├── public/ │ ├── index.html // Home/About page │ ├── mealplanner.html // Meal Planner page with nutrition search │ ├── blog.html // Blog page with detailed nutrition guides │ ├── workout.html // Workout page (Coming Soon) │ ├── merch.html // Merch page (Coming Soon) │ ├── contact.html // Contact page with form │ ├── lionFitLogo.png // Logo file │ └── style.css // Global styling for the site ├── api/ │ ├── nutrition.js // Serverless function for Nutritionix API (to be deployed on a backend platform) │ └── other-api.js // Additional API functions (if needed) ├── app.js // Client-side JavaScript (handles API calls, etc.) └── README.md // Project documentation
+### **4️⃣ Start the Backend Locally**
+Run the backend:
+```sh
+node server.js
+```
+Expected output:
+```
+🚀 Server running on port 3000
+```
+
+### **5️⃣ Open the Frontend**
+1. Open `index.html` in your browser, or
+2. Use **Live Server** in VS Code for local testing.
+
+---
+
+## 🌍 Deployment
+### **1️⃣ Deploy Backend to Vercel**
+```sh
+vercel --prod
+```
+🔗 **Production API URL:**  
+```
+https://lion-fit-iiry.vercel.app
+```
+
+### **2️⃣ Deploy Frontend to GitHub Pages**
+Push changes to GitHub, then enable **GitHub Pages** in repository settings.
+
+---
+
+## 📊 FatSecret API Usage
+### **📍 Search Food Nutrition**
+**Endpoint:**  
+```
+GET /api/nutrition?q=<food_name>
+```
+**Example Request:**
+```
+https://lion-fit-iiry.vercel.app/api/nutrition?q=chicken
+```
+👉 **Returns JSON with calories, protein, fat, and carbs**.
+
+---
+
+## 💡 Future Enhancements
+- ✅ **User Authentication** (Login & Save Meal Plans)
+- ✅ **Workout Tracking System**
+- ✅ **Integration with Wearable Devices**
+- ✅ **AI-Powered Meal Suggestions**
+
+---
+
+## 📞 Contact
+For feedback or issues, visit the **Contact Us** page or email **support@lionfit.com**.
+
+---
+
+This `README.md` includes **API integration details, deployment steps, and project structure updates**. Let me know if you'd like any modifications! 🚀
+
