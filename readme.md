@@ -25,8 +25,7 @@ LionFit is a **modern health & fitness** web application designed to provide use
 ## 📂 Project Structure
 ```
 📎 lionfit
-👉 📂 frontend
-    👉 index.html        # Homepage
+👉     index.html        # Homepage
     👉 mealplanner.html  # Meal Planner with FatSecret API
     👉 blog.html         # Nutrition & Fitness Blog
     👉 workouts.html     # Workouts (Coming Soon)
