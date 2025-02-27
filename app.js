@@ -1,21 +1,24 @@
-// Handle search queries using only Edamam APIs
-
+const API_BASE = "https://your-backend.vercel.app";
 
 async function searchNutrition() {
-  const query = document.getElementById('nutritionQuery').value.trim();
-  if (!query) {
-      alert("Please enter a food item.");
-      return;
-  }
+    const query = document.getElementById('nutritionQuery').value.trim();
+    if (!query) {
+        alert("Please enter a food item.");
+        return;
+    }
 
-  const apiUrl = `/api/nutrition?q=${encodeURIComponent(query)}`;
+    const apiUrl = `${API_BASE}/api/nutrition?q=${encodeURIComponent(query)}`;
 
-  try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      displayNutritionResults(query, data);
-  } catch (error) {
-      console.error("Error fetching nutrition data:", error);
-      alert("Failed to fetch nutrition data.");
-  }
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`API Error ${response.status}`);
+        }
+
+        const data = await response.json();
+        displayNutritionResults(data);
+    } catch (error) {
+        console.error("Error fetching nutrition data:", error);
+        alert("Failed to fetch nutrition data.");
+    }
 }
