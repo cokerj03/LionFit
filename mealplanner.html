@@ -1,11 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meal Planner - FatSecret Integration</title>
+  <title>Meal Planner </title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for charts -->
 </head>
 <body>
   <header>
@@ -24,26 +26,25 @@
   
   <main>
     <section class="meal-planner">
-      <h1>FatSecret-Powered Meal Planner</h1>
+      <h1>FatSecret API Nutrition Search</h1>
       
       <!-- Nutrition Search Section -->
       <div class="nutrition-search">
-        <h2>Analyze Food Nutrition</h2>
+        <h2>Search Food Nutrition</h2>
         <input type="text" id="nutritionQuery" placeholder="Enter a food item (e.g., Apple, Chicken)">
         <button onclick="searchNutrition()">Analyze</button>
       </div>
 
-      <!-- Recipe Search Section -->
-      <div class="recipe-search">
-        <h2>Find Recipes</h2>
-        <input type="text" id="recipeQuery" placeholder="Enter a meal type (e.g., Salad, Pasta)">
-        <button onclick="searchRecipes()">Search</button>
-      </div>
-
       <section id="results">
-        <!-- Nutrition Results -->
+        <!-- Nutrition Chart -->
+        <div id="chart-container">
+          <h2>Nutrition Breakdown</h2>
+          <canvas id="nutritionChart"></canvas>
+        </div>
+
+        <!-- Nutrition Data -->
         <div id="nutrition-results">
-          <h2>Nutrition Analysis (FatSecret API)</h2>
+          <h2>Nutrition Details</h2>
           <table>
             <thead>
               <tr>
@@ -55,23 +56,6 @@
               </tr>
             </thead>
             <tbody id="nutrition-table-body">
-              <!-- Dynamically populated rows -->
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Recipe Results -->
-        <div id="recipe-results">
-          <h2>Recipe Search (FatSecret API)</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Recipe</th>
-                <th>Source</th>
-                <th>Link</th>
-              </tr>
-            </thead>
-            <tbody id="recipe-table-body">
               <!-- Dynamically populated rows -->
             </tbody>
           </table>
