@@ -1,11 +1,19 @@
-require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const fetch = require('node-fetch');
-const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+
+// ✅ Allow frontend to call the backend (allow all origins or specify the frontend URL)
+app.use(cors({
+  origin: ["https://lion-fit-iiry-git-main-jamies-projects-9fece856.vercel.app"], // specify your frontend URL
+  methods: ["GET"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+// Your existing code...
+
 
 // ✅ Load credentials from .env
 const CLIENT_ID = process.env.FATSECRET_CLIENT_ID;
@@ -73,7 +81,6 @@ app.get('/api/nutrition', async (req, res) => {
         }
 
         const data = await response.json();
-        console.log("✅ FatSecret API Response:", data);
         res.json(data);
     } catch (error) {
         console.error("❌ Error fetching nutrition data:", error);
